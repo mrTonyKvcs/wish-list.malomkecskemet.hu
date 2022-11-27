@@ -4,5 +4,4 @@ export const wishSchema = Yup.object().shape({
   email: Yup.string().email().required("Email cím megadása kötelező!"),
   phoneNumber: Yup.string().required("Telefonszám megadása kötelező!"),
   wishList: Yup.string().required("Kívánságlista megadása kötelező!"),
-  //   password: Yup.string().required("Required").min(3, "Too Short!"),
 });

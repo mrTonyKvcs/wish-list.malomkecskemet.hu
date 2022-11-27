@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Navbar />
       <div aria-hidden="true" className="">
-        <img src="/banner/hero.png" alt="" className="" />
+        <img src="/banner/hero.png" alt="" className="w-full h-auto" />
       </div>
       <div className="container mx-auto">
         <section className="flex flex-col items-center">
