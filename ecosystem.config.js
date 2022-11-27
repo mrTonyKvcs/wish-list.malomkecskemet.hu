@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "myapp",
+      name: "wish.malomkecskemet.hu",
       script: "./start.js",
       env: {
         HOST: "localhost",
