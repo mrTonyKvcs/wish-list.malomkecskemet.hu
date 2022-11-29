@@ -1,7 +1,9 @@
+import axios from "axios";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { WishFormProps } from "../../types/wish";
 import { wishSchema } from "../../validation/wishShema";
 
-const WishForm = () => {
+const WishForm = ({ setSuccess, setError }: WishFormProps) => {
   return (
     <>
       <Formik
@@ -9,11 +11,29 @@ const WishForm = () => {
           name: "",
           email: "",
           phoneNumber: "",
-          wishList: "",
+          content: "",
         }}
         validationSchema={wishSchema}
         onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
+          setSuccess(false);
+          setError([]);
+
+          const headers = {
+            "Content-Type": "application/json",
+            SecretKey: "x6HFLNn7axgOQp7cJCEYKpHZEj7zWae3",
+            "Access-Control-Allow-Methods":
+              "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          };
+          axios
+            .post("https://api-malom.tony-dev.hu/api/wish", values, {
+              headers: headers,
+            })
+            .then((response) => {
+              setSuccess(true);
+            })
+            .catch((error) => {
+              setError(error.response.data.data);
+            });
         }}
       >
         <Form>
@@ -31,7 +51,7 @@ const WishForm = () => {
             />
             <ErrorMessage
               component="a"
-              className="text-red-500 text-lg"
+              className="text-lg text-red-500"
               name="name"
             />
           </div>
@@ -49,7 +69,7 @@ const WishForm = () => {
             />
             <ErrorMessage
               component="a"
-              className="text-red-500 text-lg"
+              className="text-lg text-red-500"
               name="email"
             />
           </div>
@@ -67,7 +87,7 @@ const WishForm = () => {
             />
             <ErrorMessage
               component="a"
-              className="text-red-500 text-lg"
+              className="text-lg text-red-500"
               name="phoneNumber"
             />
           </div>
@@ -78,23 +98,29 @@ const WishForm = () => {
             >
               Kívánságlista
             </label>
-            <textarea
-              id="wishList"
-              name="wishList"
+            {/* <textarea
+              id="content"
+              name="content"
               rows={20}
-              className="mt-1 p-10 block w-full border border-gray-300 focus:border-red-500 focus:ring-red-500 sm:text-lg"
+              className="block w-full p-10 mt-1 border border-gray-300 focus:border-red-500 focus:ring-red-500 sm:text-lg"
               placeholder="Karácsonyra szeretnék egy..."
+            /> */}
+            <Field
+              as="textarea"
+              className="block w-full h-40 px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-sm appearance-none md:h-96 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+              id="content"
+              name="content"
             />
             <ErrorMessage
               component="a"
-              className="text-red-500 text-lg"
-              name="wishList"
+              className="text-lg text-red-500"
+              name="content"
             />
           </div>
           <div className="mt-8">
             <button
               type="submit"
-              className="font-great-vibes flex justify-center w-full px-4 py-2 text-2xl font-medium text-white bg-red-600 border border-transparent shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              className="flex justify-center w-full px-4 py-2 text-2xl font-medium text-white bg-red-600 border border-transparent shadow-sm font-great-vibes hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
               Küldés
             </button>

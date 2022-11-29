@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@headlessui/react": "^0.0.0-insiders.4da0b3a",
+    "@heroicons/react": "^2.0.13",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "axios": "^1.2.0",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
     "formik": "^2.2.9",

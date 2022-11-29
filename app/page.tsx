@@ -1,47 +1,39 @@
-/* eslint-disable jsx-a11y/alt-text */
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import Navbar from "../components/Navbar";
-import styles from "./page.module.css";
 import WishForm from "../components/forms/WishForm";
+import Hero from "../components/sections/Hero";
+import Title from "../components/Title";
+import InformationList from "../components/information/InformationList";
+import { useState } from "react";
+import { XCircleIcon, CheckCircleIcon } from "@heroicons/react/20/solid";
 
 export default function Home() {
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState([]);
+
   return (
     <>
       <Navbar />
-      <div aria-hidden="true" className="">
-        <img src="/banner/hero.png" alt="" className="w-full h-auto" />
-      </div>
+      <Hero
+        path="/banner/hero.jpg"
+        alt="Idén Karácsonykor a TE kívánságod is teljesülhet!"
+      />
       <div className="container mx-auto">
         <section className="flex flex-col items-center">
-          <h3 className="section__title text-center mt-10 md:mt-0">
-            Idén Karácsonykor a TE kívánságod is teljesülhet!
-          </h3>
-          <div className="flex flex-col md:flex-row w-full justify-center gap-20 mt-10 md:mt-20 p-4">
+          <Title text="Idén Karácsonykor a TE kívánságod is teljesülhet!" />
+          <div className="flex flex-col justify-center w-full gap-20 p-4 mt-10 md:flex-row md:mt-20">
             <div className="w-full md:w-6/12 md:flex md:justify-end">
               <Image src={"/images/w1.png"} width={536} height={500} alt={""} />
             </div>
-            <div className="w-full md:w-6/12 text-3xl flex flex-col md:justify-center md:items-start">
-              <p className="">
+            <div className="flex flex-col w-full text-3xl md:w-6/12 md:justify-center md:items-start">
+              <p className="mb-10">
                 Küldd el nekünk mire vágysz igazán az ünnepek közeledtével és ha
                 Te vagy a szerencsés, idén a fa alatt találod!
               </p>
-              <p className="mt-10 mb-3 text-2xl text-justify uppercase">
-                <strong className="text-black">Korosztály:</strong>{" "}
-                <span className="text-red-malom font-bold">6-14 éves</span>
-              </p>
-              <p className="mb-3 text-2xl text-justify uppercase">
-                <strong className="text-black">Álmodozás limit:</strong>{" "}
-                <span className="text-red-malom font-bold">10 000Ft</span>
-              </p>
-              <p className="mb-10 text-2xl text-justify uppercase">
-                <strong className="text-black">Határidő:</strong>{" "}
-                <span className="text-red-malom font-bold">
-                  2022. december 1-12.
-                </span>
-              </p>
-              <p>
+              <InformationList />
+              <p className="mt-7">
                 További részletek a{" "}
                 <a
                   href="https://malomkecskemet.hu/hu/my-way"
@@ -58,12 +50,48 @@ export default function Home() {
         </section>
       </div>
       <section className="flex flex-col items-center mt-20">
-        <h3 className="section__title mb-5">Kívánságlista küldése</h3>
-        <div className="bg-red-malom w-full p-4 md:p-20">
+        <h3 className="mb-5 section__title">Kívánságlista küldése</h3>
+        <div className="w-full p-4 bg-red-malom md:p-20">
           <div className="container mx-auto">
             <div className="flex flex-col items-center">
-              <div className="border-b border-gray-200 bg-white px-4 py-4 md:py-20 sm:px-20 md:px-40 w-full md:w-9/12 shadow-lg">
-                <WishForm />
+              <div className="w-full px-4 py-4 bg-white border-b border-gray-200 shadow-lg md:py-20 sm:px-20 md:px-40 md:w-9/12">
+                {error.length !== 0 && (
+                  <div className="p-4 mb-10 border-l-4 border-red-400 bg-red-50">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <XCircleIcon
+                          className="w-5 h-5 text-red-400"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className="ml-3">
+                        {Object.values(error).map((err) => (
+                          <p key={err} className="text-red-700 text-md">
+                            {err}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {success && (
+                  <div className="p-4 mb-10 border-l-4 border-green-400 bg-green-50">
+                    <div className="flex">
+                      <div className="flex-shrink-0">
+                        <CheckCircleIcon
+                          className="w-5 h-5 text-green-400"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <p className="text-lg text-green-700">
+                          Sikeresen elkuldted a kivansagodat! :)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <WishForm setSuccess={setSuccess} setError={setError} />
               </div>
             </div>
           </div>
