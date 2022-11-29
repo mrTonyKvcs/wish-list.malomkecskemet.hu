@@ -14,7 +14,7 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
           content: "",
         }}
         validationSchema={wishSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           setLoad(true);
           setSuccess(false);
           setError([]);
@@ -32,6 +32,7 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
             .then((response) => {
               setSuccess(true);
               setLoad(false);
+              resetForm();
             })
             .catch((error) => {
               setError(error.response.data.data);
