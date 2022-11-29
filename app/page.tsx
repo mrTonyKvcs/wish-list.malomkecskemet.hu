@@ -12,6 +12,7 @@ import { XCircleIcon, CheckCircleIcon } from "@heroicons/react/20/solid";
 export default function Home() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState([]);
+  const [load, setLoad] = useState(false);
 
   return (
     <>
@@ -91,7 +92,12 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-                <WishForm setSuccess={setSuccess} setError={setError} />
+                <WishForm
+                  setSuccess={setSuccess}
+                  setError={setError}
+                  load={load}
+                  setLoad={setLoad}
+                />
               </div>
             </div>
           </div>

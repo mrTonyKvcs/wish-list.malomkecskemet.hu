@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { WishFormProps } from "../../types/wish";
 import { wishSchema } from "../../validation/wishShema";
 
-const WishForm = ({ setSuccess, setError }: WishFormProps) => {
+const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
   return (
     <>
       <Formik
@@ -15,6 +15,7 @@ const WishForm = ({ setSuccess, setError }: WishFormProps) => {
         }}
         validationSchema={wishSchema}
         onSubmit={(values) => {
+          setLoad(true);
           setSuccess(false);
           setError([]);
 
@@ -30,9 +31,11 @@ const WishForm = ({ setSuccess, setError }: WishFormProps) => {
             })
             .then((response) => {
               setSuccess(true);
+              setLoad(false);
             })
             .catch((error) => {
               setError(error.response.data.data);
+              setLoad(false);
             });
         }}
       >
@@ -119,6 +122,7 @@ const WishForm = ({ setSuccess, setError }: WishFormProps) => {
           </div>
           <div className="mt-8">
             <button
+              disabled={load}
               type="submit"
               className="flex justify-center w-full px-4 py-2 text-2xl font-medium text-white bg-red-600 border border-transparent shadow-sm font-great-vibes hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
