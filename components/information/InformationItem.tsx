@@ -1,4 +1,4 @@
-import { Item } from "../../types/Information";
+import { Item } from "../../types/information";
 
 const InformationItem = ({ label, text }: Item) => {
   return (
