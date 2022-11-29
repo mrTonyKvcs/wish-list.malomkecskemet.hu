@@ -12,6 +12,7 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
           email: "",
           phoneNumber: "",
           content: "",
+          gdpr20221201: "",
         }}
         validationSchema={wishSchema}
         onSubmit={(values, { resetForm }) => {
@@ -102,13 +103,6 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
             >
               Kívánságlista
             </label>
-            {/* <textarea
-              id="content"
-              name="content"
-              rows={20}
-              className="block w-full p-10 mt-1 border border-gray-300 focus:border-red-500 focus:ring-red-500 sm:text-lg"
-              placeholder="Karácsonyra szeretnék egy..."
-            /> */}
             <Field
               as="textarea"
               className="block w-full h-40 px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-sm appearance-none md:h-96 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
@@ -119,6 +113,23 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
               component="a"
               className="text-lg text-red-500"
               name="content"
+            />
+          </div>
+          <div className="flex flex-col mt-5">
+            <label className="text-sm">
+              <Field className="mr-2" type="checkbox" name="gdpr20221201" />
+              AZ{" "}
+              <a href="" className="text-red-malom" target="_blank">
+                ADATKEZELÉSI TÁJÉKOZTATÓT
+              </a>{" "}
+              MEGISMERTEM. KIFEJEZETTEN AKKÉNT NYILATKOZOM, HOGY HOZZÁJÁRULOK,
+              HOGY A SZERVEZŐ A REGISZTRÁCIÓ SORÁN MEGADOTT ADATAIMAT AZ
+              ADATKEZELÉSI TÁJÉKOZTATÓBAN FOGLALTAK SZERINT KEZELJE.
+            </label>
+            <ErrorMessage
+              component="a"
+              className="text-lg text-red-500"
+              name="gdpr20221201"
             />
           </div>
           <div className="mt-8">

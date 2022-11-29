@@ -6,4 +6,7 @@ export const wishSchema = Yup.object().shape({
     .required("Email cím megadása kötelező!"),
   phoneNumber: Yup.string().required("Telefonszám megadása kötelező!"),
   content: Yup.string().required("Kívánságlista megadása kötelező!"),
+  gdpr20221201: Yup.string().required(
+    "Adatkezelési tájékoztató elfogadása kötelező!"
+  ),
 });
