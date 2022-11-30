@@ -95,7 +95,7 @@ export default function Home() {
                         </div>
                         <div className="ml-3">
                           <p className="text-lg text-green-700">
-                            Sikeresen elkuldted a kivansagodat! :)
+                            Sikeresen elküldted a kívánságodat!
                           </p>
                         </div>
                       </div>
