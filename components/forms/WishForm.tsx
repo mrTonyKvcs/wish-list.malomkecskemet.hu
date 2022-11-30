@@ -2,6 +2,7 @@ import axios from "axios";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { WishFormProps } from "../../types/wish";
 import { wishSchema } from "../../validation/wishShema";
+import { gdprLink } from "../../constants/form";
 
 const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
   return (
@@ -10,6 +11,7 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
         initialValues={{
           name: "",
           email: "",
+          age: null,
           phoneNumber: "",
           content: "",
           gdpr20221201: "",
@@ -27,7 +29,7 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
               "GET, POST, PATCH, PUT, DELETE, OPTIONS",
           };
           axios
-            .post("https://api-malom.tony-dev.hu/api/wish", values, {
+            .post("https://api.malomkecskemet.hu/api/wish", values, {
               headers: headers,
             })
             .then((response) => {
@@ -60,6 +62,25 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
               name="name"
             />
           </div>
+          <div className="mt-5">
+            <label
+              className="block text-lg font-medium text-gray-700"
+              htmlFor="Email"
+            >
+              Életkor
+            </label>
+            <Field
+              type="number"
+              className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+              id="age"
+              name="age"
+            />
+            <ErrorMessage
+              component="a"
+              className="text-lg text-red-500"
+              name="age"
+            />
+          </div>
           <div className="my-5">
             <label
               className="block text-lg font-medium text-gray-700"
@@ -78,7 +99,8 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
               name="email"
             />
           </div>
-          <div>
+
+          <div className="mt-5">
             <label
               className="block text-lg font-medium text-gray-700"
               htmlFor="Email"
@@ -119,7 +141,12 @@ const WishForm = ({ setSuccess, setError, load, setLoad }: WishFormProps) => {
             <label className="text-sm">
               <Field className="mr-2" type="checkbox" name="gdpr20221201" />
               AZ{" "}
-              <a href="" className="text-red-malom" target="_blank">
+              <a
+                href={gdprLink}
+                className="text-red-malom"
+                target="_blank"
+                rel="noreferrer"
+              >
                 ADATKEZELÉSI TÁJÉKOZTATÓT
               </a>{" "}
               MEGISMERTEM. KIFEJEZETTEN AKKÉNT NYILATKOZOM, HOGY HOZZÁJÁRULOK,
