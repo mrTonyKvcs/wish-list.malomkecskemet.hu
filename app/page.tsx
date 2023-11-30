@@ -59,7 +59,7 @@ export default function Home() {
             </div>
           </section>
         </div>
-        {/* <section className="flex flex-col items-center mt-20">
+        <section className="flex flex-col items-center mt-20">
           <h3 className="mb-5 section__title">Kívánságlista küldése</h3>
           <div className="w-full p-4 bg-red-malom md:p-20">
             <div className="container mx-auto">
@@ -111,7 +111,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
       </main>
 
       <footer>
