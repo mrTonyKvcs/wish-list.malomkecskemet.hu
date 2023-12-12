@@ -101,12 +101,12 @@ export default function Home() {
                       </div>
                     </div>
                   )}
-                  <WishForm
-                    setSuccess={setSuccess}
-                    setError={setError}
-                    load={load}
-                    setLoad={setLoad}
-                  />
+                  {/* <WishForm */}
+                  {/*   setSuccess={setSuccess} */}
+                  {/*   setError={setError} */}
+                  {/*   load={load} */}
+                  {/*   setLoad={setLoad} */}
+                  {/* /> */}
                 </div>
               </div>
             </div>
